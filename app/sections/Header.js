@@ -12,45 +12,52 @@ class Header extends Component {
     }
 
 componentDidMount(){
-    AsyncStorage.getItem('userLoggedIn', (err, result)=>{
-        if(result==='none'){
-            console.log('NONE');
-        }
-        else if(result===null){
-            AsyncStorage.setItem('userLoggedIn', 'none', (err, result)=>{
-                console.log('set user to NONE');
-            })
-        }
-        else{
+    this.getUserinfo();
+}
+getUserinfo = ()=>{
+    AsyncStorage.getItem('username', (err, result)=>{
+        console.log(`yes confirm`, result);
+        if(result=='Ajay'){
             this.setState({
                 isLoggedin:true,
                 loggedUser:result
             })
         }
+         
+        else{
+            console.log(`there is no user`,'none')
+        }
     })
 }
+ 
 
     toggleUser = () => {
         if (this.state.isLoggedin) {
-            AsyncStorage.setItem('userLoggedIn', 'none', (err, result) => {
-                this.setState({
-                    isLoggedin: false,
-                    loggedUser: false
-                });
-                Alert.alert('User logged out');
-            })
-        }
-        else{
-            this.props.navigation.navigate('Login')
-        }
+           AsyncStorage.removeItem('username', (err, result)=>{
+               console.log('yes i can to', result)
+               if(result==undefined){
+                   this.setState({
+                       isLoggedin:false,
+                       loggedUser:''
+                   })
+               }
+           });
+
+            }
+            
+        
+
+          else{this.props.navigation.navigate('Login')}  
+    
     }
     render() {
 
         return (
             <View style={styles.headerStyle}>
-                <Image style={styles.logoStyle} source={require('../sections/img/Logo.jpg')} />
-                <Text style={styles.headerText} onPress={this.toggleUser}>{this.state.isLoggedin ?  this.state.loggedUser : this.props.message}</Text>
-
+                 <Text style={styles.LogoTitle}>PROTONSHUB</Text>
+                
+                <Text style={styles.headerText} onPress={this.toggleUser}>{this.state.isLoggedin ? `Welcome ${this.state.loggedUser}` : this.props.message}</Text>
+                
             </View>
         )
 
@@ -81,5 +88,15 @@ const styles = StyleSheet.create({
         width: undefined,
         height: undefined
 
+    },
+    LogoTitle:{
+        fontSize:20,
+        color:'#fff',
+        fontWeight:'bold',
+         textAlign:'center',
+         marginLeft:3,
+        textDecorationColor:'green',
+        textShadowColor:'green',
+    
     }
 })

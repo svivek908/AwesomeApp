@@ -25,6 +25,9 @@ export default class Register extends Component {
         else if(!this.state.password){
             Alert.alert('Enter password')
         }
+        else if(!this.state.passwordConfirm){
+            Alert.alert('Enter Confirm password')
+        }
         else if (this.state.password !== this.state.passwordConfirm) {
             Alert.alert('password did not matched');
            
@@ -32,7 +35,8 @@ export default class Register extends Component {
         else {
             AsyncStorage.getItem(this.state.username, (err, result) => {
                 if (result !== null) {
-                    Alert.alert('user Already Exitst');
+                    Alert.alert('user Already Exitst you can login directly');
+                    this.props.navigation.navigate('Login');
                 }
 
                 else {

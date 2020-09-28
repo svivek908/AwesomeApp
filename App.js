@@ -11,6 +11,7 @@ import Login from './app/views/Login';
 import About from './app/views/About';
 import Blog from './app/views/Blog';
 import Quiz from './app/views/Quiz';
+import Quizfinish from './app/views/Quizfinsih'
 
 //Create Stack Navigator for Navigation
 const Stack = createStackNavigator();
@@ -22,6 +23,17 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={Home}
+          options={{
+            title: 'My Home',
+            headerStyle: {
+              backgroundColor: '#fff',
+            
+            },
+            headerTintColor: '#000',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
         />
         <Stack.Screen
           name="Contact"
@@ -58,6 +70,11 @@ export default function App() {
         <Stack.Screen
           name="Quiz"
           component={Quiz}
+        />
+
+        <Stack.Screen
+          name="Quizfinish"
+          component={Quizfinish}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, Button, TextInput, View, StyleSheet, Text, Image } from 'react-native';
+import { Alert, Button, TextInput, View, StyleSheet, Text, Image, AsyncStorage } from 'react-native';
 
 
 export default class Login extends Component {
@@ -9,11 +9,13 @@ export default class Login extends Component {
     this.state = {
       username: '',
       password: '',
+      loggedIN:''
     };
   }
   
   onLogin() {
     const { username, password } = this.state;
+     
     if(!this.state.username){
         Alert.alert('Enter userName');
     }
@@ -22,7 +24,23 @@ export default class Login extends Component {
     }
 
     else{
-        Alert.alert('Credentials', `${username} + ${password}`);
+ 
+          AsyncStorage.getItem(this.state.username, (err, result)=>{
+              if(result==password){
+                AsyncStorage.setItem('username', username);
+                this.props.navigation.navigate('Home')
+                
+              }
+              else{
+                Alert.alert('Invalid Credentials')
+              }
+          })
+           
+        
+           
+         
+ 
+         
     }
   }
   cancelLogin = () => {

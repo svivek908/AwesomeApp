@@ -35,7 +35,7 @@
 import React, { Component } from 'react';
 import { ScrollView, Dimensions } from 'react-native';
 import HTML from 'react-native-render-html';
- 
+
 const htmlContent = `
     <h1 style="color:#434343; text-align:center">BLOGS</h1>
     <h2 style="color:#D39C24; text-align:center">PUBLIC BLOGS</h2>
@@ -50,9 +50,9 @@ const htmlContent = `
     
     
 `;
- 
+
 export default class Blog extends Component {
-    render () {
+    render() {
         return (
             <ScrollView style={{ flex: 1 }}>
                 <HTML html={htmlContent} imagesMaxWidth={Dimensions.get('window').width} />
@@ -61,4 +61,3 @@ export default class Blog extends Component {
     }
 }
 
- 
