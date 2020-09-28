@@ -12,12 +12,15 @@ class Header extends Component {
     }
 
 componentDidMount(){
-    this.getUserinfo();
+    this.getisLoggedin();
 }
-getUserinfo = ()=>{
+
+
+
+getisLoggedin = ()=>{
     AsyncStorage.getItem('username', (err, result)=>{
         console.log(`yes confirm`, result);
-        if(result=='Ajay'){
+        if(result){
             this.setState({
                 isLoggedin:true,
                 loggedUser:result
@@ -29,19 +32,10 @@ getUserinfo = ()=>{
         }
     })
 }
- 
 
     toggleUser = () => {
         if (this.state.isLoggedin) {
-           AsyncStorage.removeItem('username', (err, result)=>{
-               console.log('yes i can to', result)
-               if(result==undefined){
-                   this.setState({
-                       isLoggedin:false,
-                       loggedUser:''
-                   })
-               }
-           });
+            Alert.alert('Already logged in')
 
             }
             

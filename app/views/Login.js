@@ -29,7 +29,7 @@ export default class Login extends Component {
               if(result==password){
                 AsyncStorage.setItem('username', username);
                 this.props.navigation.navigate('Home')
-                
+                Alert.alert('Loggedin Successfully')
               }
               else{
                 Alert.alert('Invalid Credentials')
